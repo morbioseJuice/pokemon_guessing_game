@@ -1,8 +1,10 @@
 import os
 import json
 
+# Because the json has 4 languages, why not have the option to change it lol
 language = "english"
 
+# Reads data from json and creates python readable pokedex
 path = os.path.join(os.path.dirname(__file__), 'pokedex_kanto.json')
 with open(path, 'r', encoding='utf-8') as f:
     pokedex = json.load(f)
@@ -39,8 +41,9 @@ class utils:
             except ValueError:
                 print("Invalid number.")
 
-class json_retrieval_functions:
-
+# A class as a container for several functions that read data from the pokedex variable to spit out pokemon information
+class pokedex_retrieval_functions:
+    # Enter in a Pokemon #, and it spits out its name
     @staticmethod
     def get_pokemon_name(pokemon_number):
         for pokemon in pokedex:
@@ -50,6 +53,7 @@ class json_retrieval_functions:
                 print(found_pokemon)
                 return found_pokemon
 
+    # Enter in a Pokemon name, and it spits out its #
     @staticmethod
     def get_pokemon_number(pokemon_name):
         for pokemon in pokedex:
@@ -59,9 +63,10 @@ class json_retrieval_functions:
                 print(found_number)
                 return found_number
 
+    # Prints all pokemon from pokedex variable - 2 optional arguments allow for a range of pokemon
     @staticmethod
     def print_all_pokemon(start=1,stop=len(pokedex)):
         for index, pokemon in enumerate(pokedex[start - 1 : stop]):
             print(f"{pokemon["name"][language]} - #{pokemon["id"]}")
 
-json_retrieval_functions.print_all_pokemon()
+pokedex_retrieval_functions.print_all_pokemon()
